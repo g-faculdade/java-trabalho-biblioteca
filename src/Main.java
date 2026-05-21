@@ -89,15 +89,7 @@ public class Main {
                         }
 
                         view.exibirPrompt("Digite o nome do usuário");
-                        String nomeUsuario = scanner.nextLine();
-                        Usuario usuarioEncontrado = null;
-
-                        for (Usuario u : controller.getUsuarios()) {
-                            if (u.getNome().equalsIgnoreCase(nomeUsuario)) {
-                                usuarioEncontrado = u;
-                                break;
-                            }
-                        }
+                        Usuario usuarioEncontrado = controller.buscarUsuarioPorNome(scanner.nextLine());
 
                         if (usuarioEncontrado == null) {
                             view.exibirMensagem("Usuário não encontrado.");
@@ -109,16 +101,7 @@ public class Main {
 
                     case 7:
                         view.exibirPrompt("Digite o nome do usuário");
-                        String usuarioDevolucao = scanner.nextLine();
-                        Emprestimo emprestimoEncontrado = null;
-
-                        for (Emprestimo emprestimo : controller.getEmprestimos()) {
-                            if (emprestimo.getUsuario().getNome().equalsIgnoreCase(usuarioDevolucao)
-                                    && emprestimo.getDataDevolucao() == null) {
-                                emprestimoEncontrado = emprestimo;
-                                break;
-                            }
-                        }
+                        Emprestimo emprestimoEncontrado = controller.buscarEmprestimoAtivoPorUsuario(scanner.nextLine());
 
                         if (emprestimoEncontrado == null) {
                             view.exibirMensagem("Empréstimo não encontrado.");

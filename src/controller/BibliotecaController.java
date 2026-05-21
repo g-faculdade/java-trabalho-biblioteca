@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.Emprestimo;
 import model.Livro;
+import model.Pessoa;
 import model.Usuario;
 import view.MenuView;
 
@@ -66,10 +67,33 @@ public class BibliotecaController {
             return;
         }
 
-        for (Usuario usuario : usuarios) {
-            view.exibirMensagem(usuario.toString());
+        for (Pessoa pessoa : usuarios) {
+            view.exibirMensagem(pessoa.exibirInformacoes());
             view.exibirSeparador();
         }
+    }
+
+    public Usuario buscarUsuarioPorNome(String nome) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNome().equalsIgnoreCase(nome)) {
+                return usuario;
+            }
+        }
+
+        return null;
+    }
+
+    public Emprestimo buscarEmprestimoAtivoPorUsuario(String nome) {
+
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getUsuario().getNome().equalsIgnoreCase(nome)
+                    && emprestimo.getDataDevolucao() == null) {
+                return emprestimo;
+            }
+        }
+
+        return null;
     }
 
     public void realizarEmprestimo(Livro livro, Usuario usuario) {
